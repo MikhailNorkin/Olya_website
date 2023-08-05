@@ -13,7 +13,7 @@
   <body>
     <!--================Header Menu Area =================--> 
     {% for post in fresh_posts %}
-      {{post.title}}<br>
+      {{post.image_url}}<br>
     {% endfor %} 
     <header class="header_area">
       <div class="main_menu">
@@ -89,17 +89,19 @@
             <div class="col-lg-8">
               {% for post in fresh_posts %}
                 <div class="single-recent-blog-post">
-                  <div class="thumb">
-                    <img class="img-fluid" src="{{post.image_url}}" alt="">
-                    <ul class="thumb-info">
-                      <li><a href="#"><i class="ti-user"></i>Admin</a></li>
-                      <li><a href="#"><i class="ti-notepad"></i>January 12,2019</a></li>
-                      <li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>
-                    </ul>
-                  </div>
+                  {% if post.image_url %}
+                    <div class="thumb">
+                      <img class="img-fluid" src="{{post.image_url}}" alt="">
+                      <ul class="thumb-info">
+                        <li><a href="#"><i class="ti-user"></i>{{post.author}}</a></li>
+                        <li><a href="#"><i class="ti-notepad"></i>{{post.published_at}}</a></li>
+                        <li><a href="#"><i class="ti-themify-favicon"></i>{{post.comments_amount}}</a></li>
+                      </ul>
+                    </div>
+                  {% endif %}  
                   <div class="details mt-20">
                     <h3>{{post.title}}<br></h3>
-                    <p>{{post.text}}</p>
+                    <p>{{post.text|truncatechars:200}}</p>
                     <a class="button" href="#">Read More <i class="ti-arrow-right"></i></a>
                   </div>
                 </div>
